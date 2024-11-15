@@ -20,4 +20,4 @@ jobs:
         -vf "drawtext=text='imadTV.COM':fontcolor=white@0.6:fontsize=24:x=10:y=h-th-10" \
         -c:v libx264 -preset veryfast -crf 20 -b:v 2500k -maxrate 3000k -bufsize 5000k \
         -c:a aac -b:a 128k -ar 44100 -ac 2 -async 1 \
-        -f flv "rtmps://live-api-s.facebook.com:443/rtmp/FB-122164916480260989-0-Abx9Xgzh4XRC5DzQ"
+        -f flv "rtmps://live-api-s.facebook.com:443/rtmp/ردFB-122164916480260989-0-Abx9Xgzh4XRC5DzQ"
