@@ -1,0 +1,25 @@
+name: Facebook Stream
+
+on:
+  workflow_dispatch: # يسمح بتشغيل الـ Action يدويًا
+
+jobs:
+  stream:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install FFmpeg
+      run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+    - name: Start Streaming to Facebook
+      env:
+        FB_KEY: ${{ secrets.FB_KEY }} # مفتاح بث Facebook Live
+      run: |
+        ffmpeg -re -i "https://live4.beinconnect.us/YallaGoalApp/beINSports2.m3u8" \
+        -vf "drawtext=text='imadTV.COM':fontcolor=white@0.6:fontsize=24:x=10:y=h-th-10" \
+        -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k \
+        -c:a aac -b:a 128k -ar 44100 -ac 2 \
+        -f flv "rtmps://live-api-s.facebook.com:443/rtmp/$FB_KEY"
